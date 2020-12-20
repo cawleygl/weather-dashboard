@@ -1,18 +1,38 @@
 //Event listeners for page elements
-var cityInputEl = $("#city-name")
-var cityButtonsEl = $("#city-buttons")
-var weatherEl = $("#weather-info")
-var forecastEl = $("#forecast")
+var cityInputEl = $("#city-name");
+var cityButtonsEl = $("#city-buttons");
+var weatherEl = $("#weather-info");
+var forecastEl = $("#forecast");
 
 //Global variables
-var inputCity = ""
+var inputCity = "";
+var buttonsArr = [];
+
+//pull saved buttons from local storage if they exist 
+var buttonsArr = JSON.parse(localStorage.getItem("cities"));
+
+//Write saved buttons to page if something was pulled
+if (buttonsArr !== null) {
+    for (i = 0; i < buttonsArr.length; i++) {
+        var newButton = $("<button>");
+        cityButtonsEl.append(newButton);
+        newButton.text(buttonsArr[i])
+        newButton.attr("data-city", buttonsArr[i])
+        newButton.addClass("btn waves-effect waves-light")
+        var pgBreak = $("<br>");
+        cityButtonsEl.append(pgBreak);
+    }
+}
+
+//reset buttons array
+var buttonsArr = [];
 
 //Event listener on submit button
 $("#submit-button").on("click", function (event) {
     //Take value from city name input
     inputCity = cityInputEl.val().trim();
 
-    //Create new button element with new city name, re-write all buttons
+    //Create and append new button element with new city name
     var newButton = $("<button>");
     cityButtonsEl.append(newButton);
     newButton.text(inputCity)
@@ -21,10 +41,22 @@ $("#submit-button").on("click", function (event) {
     var pgBreak = $("<br>");
     cityButtonsEl.append(pgBreak);
 
+    //pull saved buttons from local storage if they exist
+    buttonsArr = JSON.parse(localStorage.getItem("cities"));
+
+    //add new input to buttons array
+    console.log(buttonsArr)
+    buttonsArr.push(inputCity);
+
+    //store new array in local storage
+    localStorage.setItem("cities", JSON.stringify(buttonsArr));
+
+    //reset buttons array
+    buttonsArr = [];
 
     //run function to call and write weather/forecast data
     currentWeather();
-    console.log("submitted city from text")
+    console.log("submitted city from text");
 
 
 });
