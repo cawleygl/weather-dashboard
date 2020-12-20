@@ -98,13 +98,67 @@ function currentWeather() {
         method: "GET"
     }).then(function (response) {
         console.log("call 1")
-        //Create and append title with returned city name
+        console.log(response.weather[0])
+
+        //Create and append title with returned city name and date
         var cityName = $("<h3>");
         weatherEl.append(cityName);
-        cityName.text(response.name)
+        //Convert date input from unix and write to list
+        var unixTime = response.dt;
+        milliseconds = unixTime * 1000;
+        dateObject = new Date(milliseconds);
+        var month = dateObject.toLocaleString("en-US", { month: "numeric" });
+        var day = dateObject.toLocaleString("en-US", { day: "numeric" });
+        var year = dateObject.toLocaleString("en-US", { year: "numeric" });
+        cityName.text(response.name + " (" + month + "/" + day + "/" + year + ")");
+
+        //Append icon to title for current weather status
+        var cityIcon = $("<img>");
+        cityName.append(cityIcon)
+        
+        if (response.weather[0].icon === "01d") {
+            cityIcon.attr("src", "http://openweathermap.org/img/wn/01d@2x.png")
+        } else if (response.weather[0].icon === "01n") {
+            cityIcon.attr("src", "http://openweathermap.org/img/wn/01n@2x.png")
+        } if (response.weather[0].icon === "02d") {
+            cityIcon.attr("src", "http://openweathermap.org/img/wn/02d@2x.png")
+        } else if (response.weather[0].icon === "02n") {
+            cityIcon.attr("src", "http://openweathermap.org/img/wn/02n@2x.png")
+        } if (response.weather[0].icon === "03d") {
+            cityIcon.attr("src", "http://openweathermap.org/img/wn/03d@2x.png")
+        } else if (response.weather[0].icon === "03n") {
+            cityIcon.attr("src", "http://openweathermap.org/img/wn/03n@2x.png")
+        } if (response.weather[0].icon === "04d") {
+            cityIcon.attr("src", "http://openweathermap.org/img/wn/04d@2x.png")
+        } else if (response.weather[0].icon === "04n") {
+            cityIcon.attr("src", "http://openweathermap.org/img/wn/04n@2x.png")
+        } if (response.weather[0].icon === "09d") {
+            cityIcon.attr("src", "http://openweathermap.org/img/wn/09d@2x.png")
+        } else if (response.weather[0].icon === "09n") {
+            cityIcon.attr("src", "http://openweathermap.org/img/wn/09n@2x.png")
+        } if (response.weather[0].icon === "10d") {
+            cityIcon.attr("src", "http://openweathermap.org/img/wn/10d@2x.png")
+        } else if (response.weather[0].icon === "10n") {
+            cityIcon.attr("src", "http://openweathermap.org/img/wn/10n@2x.png")
+        } if (response.weather[0].icon === "11d") {
+            cityIcon.attr("src", "http://openweathermap.org/img/wn/11d@2x.png")
+        } else if (response.weather[0].icon === "11n") {
+            cityIcon.attr("src", "http://openweathermap.org/img/wn/11n@2x.png")
+        } if (response.weather[0].icon === "13d") {
+            cityIcon.attr("src", "http://openweathermap.org/img/wn/13d@2x.png")
+        } else if (response.weather[0].icon === "13n") {
+            cityIcon.attr("src", "http://openweathermap.org/img/wn/13n@2x.png")
+        } if (response.weather[0].icon === "50d") {
+            cityIcon.attr("src", "http://openweathermap.org/img/wn/50d@2x.png")
+        } else if (response.weather[0].icon === "50n") {
+            cityIcon.attr("src", "http://openweathermap.org/img/wn/50n@2x.png")
+        }
+
+
         //Create and append list to contain weather info
         var weatherInfo = $("<ul>");
         weatherEl.append(weatherInfo);
+
 
         //Create and append temperature list item
         var temp = $("<li>");
@@ -133,6 +187,7 @@ function currentWeather() {
             method: "GET"
         }).then(function (response) {
             console.log("call 2")
+            console.log(response)
 
             //Create and append UV index list item in current weather
             var uv = $("<li>");
@@ -145,7 +200,7 @@ function currentWeather() {
 
             var uvBadge = $("<span>");
             uv.append(uvBadge);
-            uvBadge.text(response.current.uvi);
+            uvBadge.text(response.current.uvi.toFixed(2));
             uvBadge.css("float", "left");
 
             if (response.current.uvi < 3) {
