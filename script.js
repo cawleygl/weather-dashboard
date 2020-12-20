@@ -163,7 +163,7 @@ function currentWeather() {
             }
 
 
-            for (i = 0; i < 5; i++) {
+            for (i = 1; i < 6; i++) {
                 //Create and append new forecast card
                 var forecastCard = $("<div>");
                 forecastEl.append(forecastCard)
