@@ -6,7 +6,6 @@ var forecastEl = $("#forecast");
 
 //Global variables
 var inputCity = "";
-console.log(inputCity)
 var buttonsArr = [];
 var mostRecent = ""
 
@@ -29,11 +28,9 @@ if (buttonsArr !== null) {
 var inputCity = JSON.parse(localStorage.getItem("recent"));
 
     //run currentWeather for most recent city in local storage, if it exists
-    if (inputCity !== "") {
-    console.log(inputCity)
+    if (inputCity !== null) {
     currentWeather();
     }
-
 
 //reset buttons array
 var buttonsArr = [];
@@ -56,9 +53,11 @@ $("#submit-button").on("click", function (event) {
     buttonsArr = JSON.parse(localStorage.getItem("cities"));
 
     //add new input to buttons array
-    console.log(buttonsArr);
+    if (buttonsArr !== null) {
     buttonsArr.push(inputCity);
-
+    } else {
+    buttonsArr = [inputCity]
+    }
     //store new array in local storage
     localStorage.setItem("cities", JSON.stringify(buttonsArr));
 
@@ -67,7 +66,6 @@ $("#submit-button").on("click", function (event) {
 
     //run function to call and write weather/forecast data
     currentWeather();
-    console.log("submitted city from text");
 
 
 });
@@ -77,11 +75,9 @@ $("#city-buttons").on("click", function (event) {
     event.preventDefault();
 
     inputCity = ($(event.target).data("city"));
-    console.log("*" + inputCity + "*")
 
     //run currentWeather again for given city
     currentWeather();
-    console.log(inputCity + " button")
 
 
 });
@@ -92,7 +88,6 @@ function currentWeather() {
     //clear current weather and forecast info
     weatherEl.empty();
     forecastEl.empty();
-    console.log("cleared")
 
 
     //API
@@ -108,9 +103,6 @@ function currentWeather() {
         url: queryURL1,
         method: "GET"
     }).then(function (response) {
-        console.log("call 1")
-        console.log(response.weather[0])
-
         //Create and append title with returned city name and date
         var cityName = $("<h3>");
         weatherEl.append(cityName);
@@ -197,9 +189,6 @@ function currentWeather() {
             url: queryURL2,
             method: "GET"
         }).then(function (response) {
-            console.log("call 2")
-            console.log(response)
-
             //Create and append UV index list item in current weather
             var uv = $("<li>");
             weatherInfo.append(uv);
@@ -304,13 +293,9 @@ function currentWeather() {
 
             }
 
-            //save inputCity to localStorage as most recent city and reset variable
+            //Save inputCity to localStorage as most recent city and reset variable
             localStorage.setItem("recent", JSON.stringify(inputCity));
             inputCity = ""
-            console.log("reset inputCity")
-            console.log("----------------------------------------------")
-
-            //Save 
 
         });
     });
