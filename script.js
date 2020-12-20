@@ -115,40 +115,40 @@ function currentWeather() {
         //Append icon to title for current weather status
         var cityIcon = $("<img>");
         cityName.append(cityIcon)
-        
+
         if (response.weather[0].icon === "01d") {
             cityIcon.attr("src", "http://openweathermap.org/img/wn/01d@2x.png")
         } else if (response.weather[0].icon === "01n") {
             cityIcon.attr("src", "http://openweathermap.org/img/wn/01n@2x.png")
-        } if (response.weather[0].icon === "02d") {
+        } else if (response.weather[0].icon === "02d") {
             cityIcon.attr("src", "http://openweathermap.org/img/wn/02d@2x.png")
         } else if (response.weather[0].icon === "02n") {
             cityIcon.attr("src", "http://openweathermap.org/img/wn/02n@2x.png")
-        } if (response.weather[0].icon === "03d") {
+        } else if (response.weather[0].icon === "03d") {
             cityIcon.attr("src", "http://openweathermap.org/img/wn/03d@2x.png")
         } else if (response.weather[0].icon === "03n") {
             cityIcon.attr("src", "http://openweathermap.org/img/wn/03n@2x.png")
-        } if (response.weather[0].icon === "04d") {
+        } else if (response.weather[0].icon === "04d") {
             cityIcon.attr("src", "http://openweathermap.org/img/wn/04d@2x.png")
         } else if (response.weather[0].icon === "04n") {
             cityIcon.attr("src", "http://openweathermap.org/img/wn/04n@2x.png")
-        } if (response.weather[0].icon === "09d") {
+        } else if (response.weather[0].icon === "09d") {
             cityIcon.attr("src", "http://openweathermap.org/img/wn/09d@2x.png")
         } else if (response.weather[0].icon === "09n") {
             cityIcon.attr("src", "http://openweathermap.org/img/wn/09n@2x.png")
-        } if (response.weather[0].icon === "10d") {
+        } else if (response.weather[0].icon === "10d") {
             cityIcon.attr("src", "http://openweathermap.org/img/wn/10d@2x.png")
         } else if (response.weather[0].icon === "10n") {
             cityIcon.attr("src", "http://openweathermap.org/img/wn/10n@2x.png")
-        } if (response.weather[0].icon === "11d") {
+        } else if (response.weather[0].icon === "11d") {
             cityIcon.attr("src", "http://openweathermap.org/img/wn/11d@2x.png")
         } else if (response.weather[0].icon === "11n") {
             cityIcon.attr("src", "http://openweathermap.org/img/wn/11n@2x.png")
-        } if (response.weather[0].icon === "13d") {
+        } else if (response.weather[0].icon === "13d") {
             cityIcon.attr("src", "http://openweathermap.org/img/wn/13d@2x.png")
         } else if (response.weather[0].icon === "13n") {
             cityIcon.attr("src", "http://openweathermap.org/img/wn/13n@2x.png")
-        } if (response.weather[0].icon === "50d") {
+        } else if (response.weather[0].icon === "50d") {
             cityIcon.attr("src", "http://openweathermap.org/img/wn/50d@2x.png")
         } else if (response.weather[0].icon === "50n") {
             cityIcon.attr("src", "http://openweathermap.org/img/wn/50n@2x.png")
@@ -238,6 +238,48 @@ function currentWeather() {
                 var year = dateObject.toLocaleString("en-US", { year: "numeric" });
                 forecastDate.text(month + "/" + day + "/" + year);
 
+                //Append icon for current weather status
+                var forecastIcon = $("<img>");
+                forecastPanel.append(forecastIcon)
+
+                if (response.daily[i].weather[0].icon === "01d") {
+                    forecastIcon.attr("src", "http://openweathermap.org/img/wn/01d@2x.png")
+                } else if (response.daily[i].weather[0].icon === "01n") {
+                    forecastIcon.attr("src", "http://openweathermap.org/img/wn/01n@2x.png")
+                } else if (response.daily[i].weather[0].icon === "02d") {
+                    forecastIcon.attr("src", "http://openweathermap.org/img/wn/02d@2x.png")
+                } else if (response.daily[i].weather[0].icon === "02n") {
+                    forecastIcon.attr("src", "http://openweathermap.org/img/wn/02n@2x.png")
+                } else if (response.daily[i].weather[0].icon === "03d") {
+                    forecastIcon.attr("src", "http://openweathermap.org/img/wn/03d@2x.png")
+                } else if (response.daily[i].weather[0].icon === "03n") {
+                    forecastIcon.attr("src", "http://openweathermap.org/img/wn/03n@2x.png")
+                } else if (response.daily[i].weather[0].icon === "04d") {
+                    forecastIcon.attr("src", "http://openweathermap.org/img/wn/04d@2x.png")
+                } else if (response.daily[i].weather[0].icon === "04n") {
+                    forecastIcon.attr("src", "http://openweathermap.org/img/wn/04n@2x.png")
+                } else if (response.daily[i].weather[0].icon === "09d") {
+                    forecastIcon.attr("src", "http://openweathermap.org/img/wn/09d@2x.png")
+                } else if (response.daily[i].weather[0].icon === "09n") {
+                    forecastIcon.attr("src", "http://openweathermap.org/img/wn/09n@2x.png")
+                } else if (response.daily[i].weather[0].icon === "10d") {
+                    forecastIcon.attr("src", "http://openweathermap.org/img/wn/10d@2x.png")
+                } else if (response.daily[i].weather[0].icon=== "10n") {
+                    forecastIcon.attr("src", "http://openweathermap.org/img/wn/10n@2x.png")
+                } else if (response.daily[i].weather[0].icon === "11d") {
+                    forecastIcon.attr("src", "http://openweathermap.org/img/wn/11d@2x.png")
+                } else if (response.daily[i].weather[0].icon === "11n") {
+                    forecastIcon.attr("src", "http://openweathermap.org/img/wn/11n@2x.png")
+                } else if (response.daily[i].weather[0].icon === "13d") {
+                    forecastIcon.attr("src", "http://openweathermap.org/img/wn/13d@2x.png")
+                } else if (response.daily[i].weather[0].icon === "13n") {
+                    forecastIcon.attr("src", "http://openweathermap.org/img/wn/13n@2x.png")
+                } else if (response.daily[i].weather[0].icon === "50d") {
+                    forecastIcon.attr("src", "http://openweathermap.org/img/wn/50d@2x.png")
+                } else if (response.daily[i].weather[0].icon === "50n") {
+                    forecastIcon.attr("src", "http://openweathermap.org/img/wn/50n@2x.png")
+                }
+
                 //Create and append temperature list item
                 var forecastTemp = $("<div>");
                 forecastPanel.append(forecastTemp);
@@ -246,7 +288,7 @@ function currentWeather() {
                 //Create and append humidity list item
                 var forecastHumid = $("<div>");
                 forecastPanel.append(forecastHumid);
-                forecastHumid.text(response.daily[i].humidity + "%")
+                forecastHumid.text(response.daily[i].humidity + "% Humidity")
 
 
             }
