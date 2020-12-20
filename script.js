@@ -45,7 +45,7 @@ $("#submit-button").on("click", function (event) {
     buttonsArr = JSON.parse(localStorage.getItem("cities"));
 
     //add new input to buttons array
-    console.log(buttonsArr)
+    console.log(buttonsArr);
     buttonsArr.push(inputCity);
 
     //store new array in local storage
@@ -137,7 +137,31 @@ function currentWeather() {
             //Create and append UV index list item in current weather
             var uv = $("<li>");
             weatherInfo.append(uv);
-            uv.text("UV Index: " + response.current.uvi)
+            var uvDiv = $("<div>");
+            uv.append(uvDiv);
+
+            uvDiv.text("UV Index: ")
+            uvDiv.css("float", "left");
+
+            var uvBadge = $("<span>");
+            uv.append(uvBadge);
+            uvBadge.text(response.current.uvi);
+            uvBadge.addClass("white-text");
+            uvBadge.css("float", "left");
+
+
+            if (response.current.uvi < 3) {
+                uvBadge.addClass("badge green")
+            } else if (response.current.uvi >= 3 && response.current.uvi < 6) {
+                uvBadge.addClass("badge yellow")
+            } else if (response.current.uvi >= 6 && response.current.uvi < 8) {
+                uvBadge.addClass("badge orange")
+            } else if (response.current.uvi >= 8 && response.current.uvi < 11) {
+                uvBadge.addClass("badge red")
+            } else {
+                uvBadge.addClass("badge purple")
+            }
+
 
             for (i = 0; i < 5; i++) {
                 //Create and append new forecast card
