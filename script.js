@@ -6,12 +6,14 @@ var forecastEl = $("#forecast");
 
 //Global variables
 var inputCity = "";
+console.log(inputCity)
 var buttonsArr = [];
+var mostRecent = ""
 
 //pull saved buttons from local storage if they exist 
 var buttonsArr = JSON.parse(localStorage.getItem("cities"));
 
-//Write saved buttons to page if something was pulled
+//If something was pulled, write saved buttons to page and write current weather status for last city
 if (buttonsArr !== null) {
     for (i = 0; i < buttonsArr.length; i++) {
         var newButton = $("<button>");
@@ -23,6 +25,15 @@ if (buttonsArr !== null) {
         cityButtonsEl.append(pgBreak);
     }
 }
+
+var inputCity = JSON.parse(localStorage.getItem("recent"));
+
+    //run currentWeather for most recent city in local storage, if it exists
+    if (inputCity !== "") {
+    console.log(inputCity)
+    currentWeather();
+    }
+
 
 //reset buttons array
 var buttonsArr = [];
@@ -264,7 +275,7 @@ function currentWeather() {
                     forecastIcon.attr("src", "http://openweathermap.org/img/wn/09n@2x.png")
                 } else if (response.daily[i].weather[0].icon === "10d") {
                     forecastIcon.attr("src", "http://openweathermap.org/img/wn/10d@2x.png")
-                } else if (response.daily[i].weather[0].icon=== "10n") {
+                } else if (response.daily[i].weather[0].icon === "10n") {
                     forecastIcon.attr("src", "http://openweathermap.org/img/wn/10n@2x.png")
                 } else if (response.daily[i].weather[0].icon === "11d") {
                     forecastIcon.attr("src", "http://openweathermap.org/img/wn/11d@2x.png")
@@ -293,9 +304,13 @@ function currentWeather() {
 
             }
 
+            //save inputCity to localStorage as most recent city and reset variable
+            localStorage.setItem("recent", JSON.stringify(inputCity));
             inputCity = ""
             console.log("reset inputCity")
             console.log("----------------------------------------------")
+
+            //Save 
 
         });
     });
