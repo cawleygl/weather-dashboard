@@ -146,22 +146,19 @@ function currentWeather() {
             var uvBadge = $("<span>");
             uv.append(uvBadge);
             uvBadge.text(response.current.uvi);
-            uvBadge.addClass("white-text");
             uvBadge.css("float", "left");
 
-
             if (response.current.uvi < 3) {
-                uvBadge.addClass("badge green")
+                uvBadge.addClass("badge green white-text")
             } else if (response.current.uvi >= 3 && response.current.uvi < 6) {
-                uvBadge.addClass("badge yellow")
+                uvBadge.addClass("badge yellow black-text")
             } else if (response.current.uvi >= 6 && response.current.uvi < 8) {
-                uvBadge.addClass("badge orange")
+                uvBadge.addClass("badge orange white-text")
             } else if (response.current.uvi >= 8 && response.current.uvi < 11) {
-                uvBadge.addClass("badge red")
+                uvBadge.addClass("badge red white-text")
             } else {
-                uvBadge.addClass("badge purple")
+                uvBadge.addClass("badge purple white-text")
             }
-
 
             for (i = 1; i < 6; i++) {
                 //Create and append new forecast card
