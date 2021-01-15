@@ -1,4 +1,4 @@
-# weather-dashboard
+# Weather Dashboard
 
 ## Link
 https://cawleygl.github.io/weather-dashboard/
